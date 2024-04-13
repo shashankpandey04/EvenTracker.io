@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Events | EvenTracker.io</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<script>
+    window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+document.getElementById("navbar").style.padding = "30px 10px";
+document.getElementById("logo").style.fontSize = "25px";
+} else {
+document.getElementById("navbar").style.padding = "80px 10px";
+document.getElementById("logo").style.fontSize = "35px";
+}
+}
+</script>
+<body>
+    <div id="navbar">
+        <a href="#default" id="logo">EvenTracker.io</a>
+        <div id="navbar-right">
+            {% if 'username' in session %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/">Home</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about-us">About Us</a>
+            <a href="/login">Login</a>
+        {% endif %}
+        </div>
+      </div>
+    <br>
+    <br>
+    <h1>Active Events</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if events %}
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event[1] }}</td> <!-- Assuming name is the second column -->
+                        <td>{{ event[2] }}</td> <!-- Assuming date is the third column -->
+                        <td>{{ event[3] }}</td> <!-- Assuming time is the fourth column -->
+                        <td>{{ event[4] }}</td> <!-- Assuming location is the fifth column -->
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">No active events</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <a href="/create-event">Add New Event!</a>
+</body>
+</html>

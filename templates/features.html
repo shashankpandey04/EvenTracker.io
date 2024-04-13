@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Features | EvenTracker.io</title>
+</head>
+<script>
+    window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+document.getElementById("navbar").style.padding = "30px 10px";
+document.getElementById("logo").style.fontSize = "25px";
+} else {
+document.getElementById("navbar").style.padding = "80px 10px";
+document.getElementById("logo").style.fontSize = "35px";
+}
+}
+</script>
+<body>
+    <div id="navbar">
+        <a href="#default" id="logo">EvenTracker.io</a>
+        <div id="navbar-right">
+            {% if 'username' in session %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/">Home</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about-us">About Us</a>
+            <a href="/login">Login</a>
+        {% endif %}
+        </div>
+      </div>
+</body>
+</html>

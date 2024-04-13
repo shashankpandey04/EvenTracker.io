@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Login | EvenTracker.io</title>
+</head>
+<script>
+    window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+document.getElementById("navbar").style.padding = "30px 10px";
+document.getElementById("logo").style.fontSize = "25px";
+} else {
+document.getElementById("navbar").style.padding = "80px 10px";
+document.getElementById("logo").style.fontSize = "35px";
+}
+}
+</script>
+<body>
+    <div id="navbar">
+        <a href="#default" id="logo">EvenTracker.io</a>
+        <div id="navbar-right">
+            {% if 'username' in session %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/">Home</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about-us">About Us</a>
+            <a href="/login">Login</a>
+        {% endif %}
+        </div>
+      </div>
+    <br><br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}" style="color: rgb(0, 0, 0); text-align: center; padding-top: 50px;">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <br><br>
+    <div class="login-form">
+        <h2>Register Account</h2>
+        <form action="/register" method="POST">
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username">
+            <br><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password"><br>
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <a href="/login">Already have a Account? Login Here!</a>
+    </div>
+</body>
+</html>

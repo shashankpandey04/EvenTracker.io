@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style2.css"/>
+</head>
+<script>
+        window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    document.getElementById("navbar").style.padding = "30px 10px";
+    document.getElementById("logo").style.fontSize = "25px";
+  } else {
+    document.getElementById("navbar").style.padding = "80px 10px";
+    document.getElementById("logo").style.fontSize = "35px";
+  }
+}
+</script>
+<body>
+    <div id="navbar">
+        <a href="#default" id="logo">EvenTracker.io</a>
+        <div id="navbar-right">
+            {% if 'username' in session %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/">Home</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about-us">About Us</a>
+            <a href="/login">Login</a>
+        {% endif %}
+        </div>
+      </div>
+    <div class="home">
+        <div class="bgimg-1">
+            <div class="caption">
+            <span class="border">Even Tracker</span>
+            <p style="color: white;">Why EvenTracker? Scroll Down</p>
+            </div>
+            </div>
+            
+            <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+            <h3 style="text-align:center;">Comprehensive Event Planning Tools:</h3>
+            <p>Our platform offers a comprehensive suite of event planning tools designed to streamline every aspect of your event planning process. From conceptualization to flawless execution, our tools empower you to create detailed event plans tailored to your specific needs. Easily manage guest lists, select venues, and coordinate with vendors, all within a single intuitive interface. Our scheduling features enable you to set tasks, establish deadlines, and track progress, ensuring that your event stays on course from start to finish.</p>
+            </div>
+            
+            <div class="bgimg-2">
+            <div class="caption">
+            <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span>
+            </div>
+            </div>
+            
+            <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+            <h3 style="text-align:center;">Efficient Budget Management System:</h3>
+            <p>Take control of your event finances with our efficient budget management system. Set realistic budgets, monitor expenses, and track payments effortlessly, providing you with a clear overview of your financial commitments at all times. Our platform helps you stay within budget and avoid unexpected financial challenges, allowing you to allocate resources effectively and maximize the success of your event.</p>
+            </div>
+            
+            <div class="bgimg-3">
+            <div class="caption">
+            <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">SCROLL UP</span>
+            </div>
+            </div>
+            
+            <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+            <h3 style="text-align:center;">Enhanced Event Planning Experience:</h3>
+            <p>In addition to comprehensive planning and budgeting tools, our platform offers a range of additional features to enhance your event planning experience. Seamlessly manage RSVPs and guest communications with our intuitive RSVP management system. Create personalized seating arrangements for your guests using our interactive seating arrangement tool. Promote your event effectively through custom invitations and RSVP management features. Gain valuable insights into your event planning process with our robust reporting and analytics tools, enabling you to make data-driven decisions and optimize future events for success. With our platform, planning events of any scale becomes a seamless and enjoyable experience, empowering you to create memorable moments for your attendees.</p>
+            </div>
+            
+            <div class="bgimg-1">
+            <div class="caption">
+            <span class="border">COOL!</span>
+            </div>
+        </div>
+    </div>      
+</body>
+</html>

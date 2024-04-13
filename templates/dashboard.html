@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Dashboard | EvenTracker.io</title>
+</head>
+<style>
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+.tablink:hover {
+  background-color: #777;
+}
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 20px;
+  text-align: center;
+}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+
+}
+#London {background-color:rgb(255, 32, 78);}
+#Paris {background-color:rgb(160, 21, 62);}
+#Tokyo {background-color:rgb(93, 14, 65);}
+#Oslo {background-color:rgb(0, 34, 77);}
+p {
+  font-size: 20px;
+  text-align: center;
+}
+h1 {
+  font-size: 30px;
+  text-align: center;
+}
+form {
+  text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid rgb(177, 74, 74);
+    
+}
+</style>
+<script>
+  window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+document.getElementById("navbar").style.padding = "30px 10px";
+document.getElementById("logo").style.fontSize = "25px";
+} else {
+document.getElementById("navbar").style.padding = "80px 10px";
+document.getElementById("logo").style.fontSize = "35px";
+}
+}
+</script>
+<body>
+  <div id="navbar">
+    <a href="#default" id="logo">EvenTracker.io</a>
+    <div id="navbar-right">
+        {% if 'username' in session %}
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/about-us">About Us</a>
+        <a href="/login">Login</a>
+    {% endif %}
+    </div>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+    <h1>Dashboard</h1>
+    <p>Total Active Events: {{ total_events }}</p>
+    <div id="London" class="tabcontent">
+        <h1>Budget</h1>
+        <p>Manage Budget for your Event!</p>
+      </div>
+      
+      <div id="Paris" class="tabcontent">
+        <h1>Promotions</h1>
+        <p>Log Promoters for your event.</p>
+      </div>
+      
+      <div id="Tokyo" class="tabcontent">
+        <p>Manage Event</p>
+        <form class="login-form" method="POST" action="/add-event" >
+          <label for="name">Event Name</label>
+          <input type="text" id="name" name="name" required>
+          <br>
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" required>
+          <br>
+          <label for="date">Date</label>
+          <input type="text" id="date" name="date" required>
+          <br>
+          <label for="time">Time</label>
+          <input type="text" id="time" name="time" required>
+          <br>
+          <button type="submit">Create Event</button>
+      </form>
+      <br><br>
+      <table id="event-table">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event[0] }}</td>
+                    <td>
+                        <button onclick="modifyEvent('{{ event[0] }}')">Modify</button>
+                        <button onclick="deleteEvent('{{ event[0] }}')">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+      </div>
+      
+      <div id="Oslo" class="tabcontent">
+        <h1>Schedule</h1>
+        <p>Schedule Start/Break/End time for your event.</p>
+        <p>Change Date / Time for your event too.</p>
+      </div>
+      
+      
+    <button class="tablink" onclick="openCity('London', this, 'rgb(255, 32, 78)')" id="defaultOpen">Budget</button>
+    <button class="tablink" onclick="openCity('Paris', this, 'rgb(160, 21, 62)')">Promoters</button>
+    <button class="tablink" onclick="openCity('Tokyo', this, 'rgb(93, 14, 65)')">Manage Event</button>
+    <button class="tablink" onclick="openCity('Oslo', this, 'rgb(0, 34, 77)')">Scheduling</button>
+    <script>
+        function openCity(cityName, elmnt, color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  document.getElementById(cityName).style.display = "block";
+
+  elmnt.style.backgroundColor = color;
+}
+
+document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>

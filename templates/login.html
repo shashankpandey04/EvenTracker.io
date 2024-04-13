@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Login | EvenTracker.io</title>
+</head>
+<style>
+    form {
+  border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+  width: 10%;
+  border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+h2 {
+    text-align: center;
+}
+</style>
+<script>
+    window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+document.getElementById("navbar").style.padding = "30px 10px";
+document.getElementById("logo").style.fontSize = "25px";
+} else {
+document.getElementById("navbar").style.padding = "80px 10px";
+document.getElementById("logo").style.fontSize = "35px";
+}
+}
+</script>
+<body>
+    <div id="navbar">
+        <a href="#default" id="logo">EvenTracker.io</a>
+        <div id="navbar-right">
+            {% if 'username' in session %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/">Home</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about-us">About Us</a>
+            <a href="/login">Login</a>
+        {% endif %}
+        </div>
+      </div>
+    <br><br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}" style="color: rgb(0, 0, 0); text-align: center; padding-top: 50px;">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <br><br><br><br><br><br><br><br><br><br><br>
+        <h2>Login</h2>
+        <br>
+        <form action="/login" method="post">
+            <div class="imgcontainer">
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/013/558/252/small_2x/administrator-man-user-business-flat-line-filled-icon-banner-template-free-vector.jpg" alt="Avatar" class="avatar">
+            </div>
+          
+            <div class="container">
+              <label for="username"><b>Username</b></label>
+              <input type="text" id="username" name="username" placeholder="Enter Your Username">
+          
+              <label for="password"><b>Password</b></label>
+              <input type="password" id="password" name="password" placeholder="Enter Your Password">
+          
+              <button type="submit">Login</button>
+            </div>
+          
+            <div class="container" style="background-color:#f1f1f1">
+              <a href="/"><button type="button" class="cancelbtn" >Cancel</button></a>
+            </div>
+          </form>
+        <a href="/register"><p style="text-align: center;">Not Registered Yet? Register Here!</p></a>
+</body>
+<footer>
+    <p style="text-align: center;">© 2021 EvenTracker.io. All Rights Reserved.</p>
+</footer>
+</html>
